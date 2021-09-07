@@ -1,6 +1,6 @@
-[submodule "class101_account"]
+[submodule "account"]
 	path = class101_account
 	url = https://github.com/pm1100tm/class101_account
-[submodule "class101_menu"]
+[submodule "menu"]
 	path = class101_menu
 	url = https://github.com/pm1100tm/class101_menu
