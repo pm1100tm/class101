@@ -1,17 +1,20 @@
 import os
 import django
 import traceback
-import backend101.settings
-
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend101.settings')
 django.setup()
 
 from django.db.models import Max
 from django.db        import transaction
 
-from menu.models import *
+from menu.models    import *
+from account.models import *
+
+from account.enums  import AccountTypeEnum, SocialSignUpTypeEnum
 
 
+# =======================================================================================================================
+# =======================================================================================================================
 def add_main_menu():
     """ 메인 메뉴 생성
     author: swd
@@ -176,28 +179,65 @@ def add_third_category():
     ThirdCategory.objects.create(second_category=second_category_9, id=69, index_number=69, name='영상')
 
 
-def create_data():
+def add_account_type():
+    AccountTypes.objects.create(id=AccountTypeEnum.ADMIN.value, name=AccountTypeEnum.ADMIN.name)
+    AccountTypes.objects.create(id=AccountTypeEnum.CREATOR.value, name=AccountTypeEnum.CREATOR.name)
+    AccountTypes.objects.create(id=AccountTypeEnum.CONSUMER.value, name=AccountTypeEnum.CONSUMER.name)
+
+
+def add_social_signup_type():
+    SocialSignUpType.objects.create(id=SocialSignUpTypeEnum.NO_SOCIAL.value, name=SocialSignUpTypeEnum.NO_SOCIAL.name)
+    SocialSignUpType.objects.create(id=SocialSignUpTypeEnum.KAKAO.value, name=SocialSignUpTypeEnum.KAKAO.name)
+    SocialSignUpType.objects.create(id=SocialSignUpTypeEnum.NAVER.value, name=SocialSignUpTypeEnum.NAVER.name)
+    SocialSignUpType.objects.create(id=SocialSignUpTypeEnum.FACEBOOK.value, name=SocialSignUpTypeEnum.FACEBOOK.name)
+    SocialSignUpType.objects.create(id=SocialSignUpTypeEnum.GOOGLE.value, name=SocialSignUpTypeEnum.GOOGLE.name)
+    SocialSignUpType.objects.create(id=SocialSignUpTypeEnum.APPLE.value, name=SocialSignUpTypeEnum.APPLE.name)
+
+
+# =======================================================================================================================
+# =======================================================================================================================
+def create_menu_data():
     try:
-        print('*'*80)
-        print("데이터를 생성합니다.")
-        
-        add_main_menu()
-        print("add_main_menu 데이터가 생성되었습니다.")
-        
-        add_first_category()
-        print("add_first_category 데이터가 생성되었습니다.")
-        
-        add_second_category()
-        print("add_second_category 데이터가 생성되었습니다.")
-        
-        add_third_category()
-        print("add_third_category 데이터가 생성되었습니다.")
-        
+        with transaction.atomic():
+            print('*' * 80)
+            print("create_menu_data 를 실행합니다.")
+            
+            add_main_menu()
+            print("add_main_menu 데이터가 생성되었습니다.")
+            
+            add_first_category()
+            print("add_first_category 데이터가 생성되었습니다.")
+            
+            add_second_category()
+            print("add_second_category 데이터가 생성되었습니다.")
+            
+            add_third_category()
+            print("add_third_category 데이터가 생성되었습니다.")
+    
     except Exception as e:
         print('*' * 80)
         print('데이터 생성 중 오류가 발생하였습니다. 롤백합니다.')
         print(str(e))
         traceback.print_exc()
-        transaction.rollback()
 
-create_data()
+
+def create_account_default_data():
+    try:
+        with transaction.atomic():
+            print('*' * 80)
+            print("create_account_default_data 를 실행합니다.")
+            
+            add_account_type()
+            print("add_account_type 데이터가 생성되었습니다.")
+            
+            add_social_signup_type()
+            print("add_social_signup_type 데이터가 생성되었습니다.")
+    
+    except Exception as e:
+        print('*' * 80)
+        print('데이터 생성 중 오류가 발생하였습니다. 롤백합니다.')
+        print(str(e))
+        traceback.print_exc()
+
+# create_menu_data()
+create_account_default_data()

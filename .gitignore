@@ -309,3 +309,6 @@ $RECYCLE.BIN/
 # user defined
 my_test.py
 prj_settings.py
+data_init.py
+data_truncate.py
+migrations
