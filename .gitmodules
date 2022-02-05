@@ -4,3 +4,6 @@
 [submodule "menu"]
     path = menu
     url = https://github.com/pm1100tm/class101_menu
+[submodule "common"]
+    path = common
+    url = https://github.com/pm1100tm/class101_common
