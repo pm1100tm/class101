@@ -230,7 +230,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env
+backend101/.env
 .venv
 env/
 venv/
@@ -312,3 +312,4 @@ prj_settings.py
 data_init.py
 data_truncate.py
 migrations
+.env
