@@ -151,3 +151,4 @@ environ.Env.read_env()
 KAKAO_HOST                = env('KAKAO_HOST')
 KAKAO_REST_API_KEY        = env('KAKAO_REST_API_KEY')
 KAKAO_SIGNUP_REDIRECT_URI = env('KAKAO_SIGNUP_REDIRECT_URI')
+
