@@ -313,3 +313,4 @@ data_init.py
 data_truncate.py
 migrations
 .env
+*.rdb
