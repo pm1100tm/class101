@@ -1,0 +1,30 @@
+<>:
+
+-
+
+
+######## Git Commit Convention ########### -> |
+# <type>: title (제목)
+
+# -desc (본문, 생략 가능)
+# resolves, issue, ... (해결한 이슈, 생략 가능)
+# issue track number (#number) ((해결한 이슈, 생략 가능)
+# etc (그 외, 생략 가능)
+
+# 제목은 간단하게
+# 제목과 본문을 빈 행으로 구분
+# 제목에 명령문 사용, 마침표 X, 과거형 X
+# 주로 [무엇을, 왜] 를 설명, 어떻게는 필요할 때 작성
+
+# --- COMMIT END ---
+# type
+#   FEATURE  : New feature
+#   FIX      : Fix bug
+#   REFACTOR : Refactor code
+#   STYLE    : Change style of code(white space, semicolon etc)
+#   TEST     : Add/Change/Delete test case
+#   DOCS     : Add/Change/Delete document
+#   BUILD    : 빌드 스크립트 수정
+#   CI       : ci 스크립트 수정
+#   CHORE    : 패키지 매니저 수정 (ex .gitignore, requirements )
+# ------------------
