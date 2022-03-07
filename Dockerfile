@@ -7,9 +7,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential python-dev \
     vim
 
-COPY . /app
-
 WORKDIR /app
+
+COPY ./requirements.txt /app/
 
 RUN pip install --upgrade pip \
     pip install -r requirements.txt
+
+COPY . /app/

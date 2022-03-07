@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.9'
 
 services:
   database:
@@ -11,10 +11,10 @@ services:
     command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=1234_abc
-      - MYSQL_DATABASE=aaa
-      - MYSQL_USER=swd
-      - MYSQL_PASSWORD=1234
+      - MYSQL_ROOT_PASSWORD='${MYSQL_ROOT_PASSWORD}'
+      - MYSQL_DATABASE='${MYSQL_DATABASE}'
+      - MYSQL_USER='${MYSQL_USER}'
+      - MYSQL_PASSWORD='${MYSQL_PASSWORD}'
 
   web:
     build:
@@ -22,11 +22,36 @@ services:
       dockerfile: Dockerfile
     container_name: web
     working_dir: /app/class101_backend
-    command: python manage.py runserver 0.0.0.0:8000
+    command: bash -c "python manage.py migrate && python manage.py collectstatic --no-input && uwsgi --ini uwsgi.ini"
+    env_file:
+      - ./.env
     volumes:
       - ./:/app
+      - static_volume:/app/static
     ports:
       - '8000:8000'
     restart: always
     depends_on:
       - database
+
+  nginx:
+    build:
+      context: .
+      dockerfile: ./nginx/Dockerfile
+    container_name: nginx
+    restart: always
+    ports:
+      - '80:80'
+    volumes:
+      - ./:/app
+      - ./log:/var/log/nginx
+      - ./nginx/sites-available:/etc/nginx/sites-available
+      - ./nginx/sites-enabled:/etc/nginx/sites-enabled
+      - static_volume:/app/static
+    depends_on:
+      - database
+      - web
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+
+volumes:
+    static_volume:
