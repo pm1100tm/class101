@@ -12,7 +12,6 @@ import os
 import environ
 
 from pathlib import Path
-from prj_settings import SECRET_KEY, DEBUG_MODE_FLAG, DB
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,8 +21,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY    = SECRET_KEY['secret']
-DEBUG         = DEBUG_MODE_FLAG
+SECRET_KEY    = os.environ.get('SECRET_KEY','secret')
+DEBUG         = os.environ.get('DEBUG', True)
 ALLOWED_HOSTS = ['*']
 
 
@@ -77,10 +76,25 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'backend101.wsgi.application'
 
+print('=======================================================================')
+print(os.environ.get('MYSQL_DATABASE'))
+print(os.environ.get('MYSQL_USER'))
+print(os.environ.get('MYSQL_PASSWORD'))
+print(os.environ.get('MYSQL_HOST'))
+print('=======================================================================')
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-DATABASES = DB
+DATABASES = {
+    'default': {
+        'ENGINE'  : 'django.db.backends.mysql',
+        'NAME'    : os.environ.get('MYSQL_DATABASE', 'class101'),
+        'USER'    : os.environ.get('MYSQL_USER', 'swd'),
+        'PASSWORD': os.environ.get('MYSQL_PASSWORD', '1234'),
+        'HOST'    : os.environ.get('MYSQL_HOST', 'localhost'),
+        'PORT'    : '3306',
+    }
+}
 
 
 # Password validation
@@ -113,6 +127,7 @@ USE_TZ        = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 
 #REMOVE_APPEND_SLASH_WARNING
@@ -144,11 +159,10 @@ CORS_ALLOW_HEADERS = (
 
 
 # import 3th party Environ Variable
-import environ
-env = environ.Env()
-environ.Env.read_env()
+# import environ
+# env = environ.Env()
+# environ.Env.read_env()
 
-KAKAO_HOST                = env('KAKAO_HOST')
-KAKAO_REST_API_KEY        = env('KAKAO_REST_API_KEY')
-KAKAO_SIGNUP_REDIRECT_URI = env('KAKAO_SIGNUP_REDIRECT_URI')
-
+KAKAO_HOST                = os.environ.get('KAKAO_HOST', 'aaa')
+KAKAO_REST_API_KEY        = os.environ.get('KAKAO_REST_API_KEY', 'aaa')
+KAKAO_SIGNUP_REDIRECT_URI = os.environ.get('KAKAO_SIGNUP_REDIRECT_URI', 'aaa')
