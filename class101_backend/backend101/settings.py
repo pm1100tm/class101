@@ -10,9 +10,16 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
 import environ
+<<<<<<< HEAD:class101_backend/backend101/settings.py
 
 from pathlib import Path
 
+=======
+
+from pathlib import Path
+from prj_settings import SECRET_KEY, DEBUG_MODE_FLAG, DB
+
+>>>>>>> develop:backend101/settings.py
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -159,6 +166,7 @@ CORS_ALLOW_HEADERS = (
 
 
 # import 3th party Environ Variable
+<<<<<<< HEAD:class101_backend/backend101/settings.py
 # import environ
 # env = environ.Env()
 # environ.Env.read_env()
@@ -166,3 +174,13 @@ CORS_ALLOW_HEADERS = (
 KAKAO_HOST                = os.environ.get('KAKAO_HOST', 'aaa')
 KAKAO_REST_API_KEY        = os.environ.get('KAKAO_REST_API_KEY', 'aaa')
 KAKAO_SIGNUP_REDIRECT_URI = os.environ.get('KAKAO_SIGNUP_REDIRECT_URI', 'aaa')
+=======
+import environ
+env = environ.Env()
+environ.Env.read_env()
+
+KAKAO_HOST                = env('KAKAO_HOST')
+KAKAO_REST_API_KEY        = env('KAKAO_REST_API_KEY')
+KAKAO_SIGNUP_REDIRECT_URI = env('KAKAO_SIGNUP_REDIRECT_URI')
+
+>>>>>>> develop:backend101/settings.py

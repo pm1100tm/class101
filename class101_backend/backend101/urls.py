@@ -22,7 +22,13 @@ from .views                  import HelloWorldView
 
 
 urlpatterns = [
+<<<<<<< HEAD:class101_backend/backend101/urls.py
     path('test/', HelloWorldView.as_view()),
     path('admin/', admin.site.urls),
     path('account/', include('account.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+=======
+    path('admin', admin.site.urls),
+    path('account/', include('account.urls')),
+]
+>>>>>>> develop:backend101/urls.py
