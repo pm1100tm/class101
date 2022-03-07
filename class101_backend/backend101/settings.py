@@ -8,13 +8,14 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
+import os
+import environ
+
 from pathlib import Path
 from prj_settings import SECRET_KEY, DEBUG_MODE_FLAG, DB
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'menu',
     'account',
+    'product',
 ]
 
 REST_FRAMEWORK = {
@@ -139,3 +141,14 @@ CORS_ALLOW_HEADERS = (
     'x-csrftoken',
     'x-requested-with',
 )
+
+
+# import 3th party Environ Variable
+import environ
+env = environ.Env()
+environ.Env.read_env()
+
+KAKAO_HOST                = env('KAKAO_HOST')
+KAKAO_REST_API_KEY        = env('KAKAO_REST_API_KEY')
+KAKAO_SIGNUP_REDIRECT_URI = env('KAKAO_SIGNUP_REDIRECT_URI')
+

@@ -1,12 +1,12 @@
 [submodule "account"]
-    path = account
+    path = class101_backend/account
     url = https://github.com/pm1100tm/class101_account
 [submodule "menu"]
-    path = menu
+    path = class101_backend/menu
     url = https://github.com/pm1100tm/class101_menu
-[submodule "common"]
-    path = common
-    url = https://github.com/pm1100tm/class101_common
-[submodule "product"]
-    path = product
-    url = https://github.com/pm1100tm/class101_product
+[submodule "class101_backend/product"]
+	path = class101_backend/product
+	url = https://github.com/pm1100tm/class101_product.git
+[submodule "class101_backend/common"]
+	path = class101_backend/common
+	url = https://github.com/pm1100tm/class101_common.git
