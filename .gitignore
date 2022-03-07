@@ -314,3 +314,5 @@ data_truncate.py
 migrations
 .env
 *.rdb
+screenshot/
+db_menu

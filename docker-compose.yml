@@ -1,0 +1,32 @@
+version: '3.7'
+
+services:
+  database:
+    image: mysql:5.7
+    container_name: mysql
+    volumes:
+      - ./mysql:/var/lib/mysql
+    ports:
+      - '3307:3306'
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234_abc
+      - MYSQL_DATABASE=aaa
+      - MYSQL_USER=swd
+      - MYSQL_PASSWORD=1234
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: web
+    working_dir: /app/class101_backend
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./:/app
+    ports:
+      - '8000:8000'
+    restart: always
+    depends_on:
+      - database
