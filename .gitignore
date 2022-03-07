@@ -316,3 +316,7 @@ migrations
 *.rdb
 screenshot/
 db_menu
+log/
+mysql/
+static/
+class101_backend/static/
